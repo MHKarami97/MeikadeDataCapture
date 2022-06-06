@@ -43,13 +43,13 @@ public class Meikade
 
     public async Task<List<SyncData>> GetSyncData()
     {
-        var data = await _baseHttpRequest.Post<Base<List<SyncData>>>(
+        var data = await _baseHttpRequest.Get<Base<List<SyncData>>>(
             $"{_baseUrl}/user/sync",
+            GetTokenHeader(),
             new
             {
                 date = "2000-01-01 01:01:01"
-            },
-            GetTokenHeader());
+            });
 
         return data.Result;
     }

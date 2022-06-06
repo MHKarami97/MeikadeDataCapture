@@ -1,6 +1,6 @@
 ﻿using MeikadeDataCapture;
 
-Console.WriteLine("Hello, World!");
+Console.WriteLine("Start");
 
 try
 {
@@ -10,7 +10,6 @@ try
     const string password = "";
     const string username = "";
     var result = new List<string>();
-
 
     var token = await meikade.Login(username, password);
 
@@ -30,6 +29,8 @@ try
     }
 
     await meikadeDataProcessor.WriteToFile(result);
+
+    Console.WriteLine("Finish");
 }
 catch (Exception e)
 {

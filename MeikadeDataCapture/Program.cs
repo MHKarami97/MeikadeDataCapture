@@ -17,7 +17,9 @@ try
 
     var syncData = await meikade.GetSyncData();
 
-    var favorites = meikadeDataProcessor.GetFavoriteLists(syncData);
+    var justSadi = meikadeDataProcessor.GetSpecificPoet(syncData, 7);
+
+    var favorites = meikadeDataProcessor.GetFavoriteLists(justSadi);
 
     foreach (var favorite in favorites)
     {

@@ -21,6 +21,20 @@ public class MeikadeDataProcessor
         return result;
     }
 
+    public List<SyncData> GetSpecificPoet(List<SyncData> input, int poetId)
+    {
+        var data = input.Where(a => a.PoetId == poetId).ToList();
+
+        return data;
+    }
+
+    public List<SyncData> GetSpecificNotPoet(List<SyncData> input, int poetId)
+    {
+        var data = input.Where(a => a.PoetId != poetId).ToList();
+
+        return data;
+    }
+
     public string GetSinglePoem(List<Verse> verses, int verseId)
     {
         var data1 = verses.First(a => a.Vorder.Equals(verseId));

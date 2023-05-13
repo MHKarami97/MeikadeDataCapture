@@ -37,18 +37,34 @@ public class MeikadeDataProcessor
 
     public string GetSinglePoem(List<Verse> verses, int verseId)
     {
-        var data1 = verses.First(a => a.Vorder.Equals(verseId));
-        var data2 = verses.First(a => a.Vorder.Equals(verseId + 1));
+        var data1 = verses.FirstOrDefault(a => a.Vorder.Equals(verseId));
+        var data2 = verses.FirstOrDefault(a => a.Vorder.Equals(verseId + 1));
 
-        var result = data1.Text + " / " + data2.Text;
+        var result = string.Empty;
+
+        if (data1 != null)
+        {
+            result = data1.Text;
+
+            if (data2 != null)
+            {
+                result += " / " + data2.Text;
+            }
+        }
+        else if (data2 != null)
+        {
+            result = data2.Text;
+        }
 
         return result;
     }
 
-    public async Task WriteToFile(List<string> input)
+    public async Task WriteToFile(List<string> input, int poetId)
     {
+        var file = ResultFolder + "_" + poetId;
+
         Directory.CreateDirectory(ResultFolder);
 
-        await File.WriteAllLinesAsync($"{ResultFolder}/{ResultFile}.txt", input);
+        await File.WriteAllLinesAsync($"{ResultFolder}/{file}.txt", input);
     }
 }
